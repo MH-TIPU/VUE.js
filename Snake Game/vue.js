@@ -6,8 +6,11 @@ Vue.component('snake-game',{
 					<span v-for="y in list" :data-id="y" class="px col" :class="{snake: isSnake(x,y), food: isFood(x,y)}"></span>
 				</span>
 			</div>
-			<span><p>Score: <b>{{ score }}</b></p></span>
+			<br><br><br>
+
+			<span><p class = "score">Score: <b>{{ score }}</b></p></span>
 		</div>
+
 	`,
 
 	data: function(){
@@ -40,7 +43,7 @@ Vue.component('snake-game',{
 			return x;
 		},
 		score: function(){
-			return this.snakeLenth-1;
+			return this.snakeLenth-3;
 		},
 	},
 
@@ -50,7 +53,8 @@ Vue.component('snake-game',{
 
 			window.addEventListener('keyup', this.changeDirection);
 
-			setInterval(this.move,100);
+			setInterval(this.move,200);			
+			
 		},
 		newGame(){
 			var self = this;
@@ -61,6 +65,12 @@ Vue.component('snake-game',{
 			self.snake.push(self.getRand());
 			self.food = self.getRand();
 		},
+
+		gameResult(){
+			alert('Game over. Your score: ' + this.score );
+			this.newGame();
+		},
+
 		move(){
 
 			var self = this;
@@ -70,7 +80,7 @@ Vue.component('snake-game',{
 			var x = last.x;
 			var y = last.y;
 
-
+			
 			if(x == this.food.x && y == this.food.y){
 				this.eat();
 			}
@@ -98,25 +108,28 @@ Vue.component('snake-game',{
 
 			if(y > self.total){
 				y = 0;
+				this.gameResult();
 			}
 
 			if(x > self.total){
-				x = 0;
+				x = 0;			
+				this.gameResult();
 			}
 
 			if(y < 0){
-				y = self.total;
+				y = self.total;	
+				this.gameResult();			
 			}
 
 			if(x < 0){
 				x = self.total;
+				this.gameResult();			
 			}
 
 			// self bite
 			for(i in this.snake){
 				if(this.snake[i] != undefined && this.snake[i].x == x && this.snake[i].y == y){
-					alert('Game over. Your score: ' + this.score );
-					this.newGame();
+					this.gameResult();			
 				}
 			}
 
