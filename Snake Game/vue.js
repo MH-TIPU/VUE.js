@@ -6,9 +6,9 @@ Vue.component('snake-game',{
 					<span v-for="y in list" :data-id="y" class="px col" :class="{snake: isSnake(x,y), food: isFood(x,y)}"></span>
 				</span>
 			</div>
-			<br><br><br>
-
+			<br><br>
 			<span><p class = "score">Score: <b>{{ score }}</b></p></span>
+			<span><p class = "scorer" v-show="temp">Best Scorer: {{ Scorer }} - {{ hi_score }}</p></span>
 		</div>
 
 	`,
@@ -22,6 +22,9 @@ Vue.component('snake-game',{
 			'snakeDirection': 'right',
 			'food': {},
 			'game_on': true,
+			'hi_score': 0,
+			'Scorer': '',
+			'temp': false
 		}
 	},
 
@@ -53,7 +56,7 @@ Vue.component('snake-game',{
 
 			window.addEventListener('keyup', this.changeDirection);
 
-			setInterval(this.move,200);			
+			setInterval(this.move,250);			
 			
 		},
 		newGame(){
@@ -67,8 +70,26 @@ Vue.component('snake-game',{
 		},
 
 		gameResult(){
-			alert('Game over. Your score: ' + this.score );
+
+			if (this.score>this.hi_score) {
+						
+  				var person = prompt("Please enter your name:");
+				if (person == null || person == "") {
+					var person = prompt("Please enter your name:");
+   			    } else {
+				    this.Scorer = person;
+				}
+				alert('Game over. Congratulation ' + person + ' Your score: ' + this.score + ' is Best Score.');
+				this.hi_score=this.score;
+				this.temp = true;
+				
+			}
+			else{
+				alert('Game over. Your score: ' + this.score );
+			}
+			
 			this.newGame();
+
 		},
 
 		move(){
