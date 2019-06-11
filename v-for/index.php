@@ -8,7 +8,6 @@
 </head>
 	<body>
 		<div id="paragraph">
-
 			<form @submit.prevent="addItems">
 				<input type="text" v-model="newItem">
 			</form>
@@ -18,8 +17,7 @@
 				    {{item}}
 				</li>
 			</div>
-
-
+			
 			<div>
 				<li v-for="profile in profiles">
 				    {{profile.name}} - {{profile.age}} 
@@ -30,4 +28,4 @@
 		</div>
 		<script src="vue.js"></script>
 	</body>
-</html>
+</html>  
