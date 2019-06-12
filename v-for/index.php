@@ -14,11 +14,16 @@
 
 			<div>
 				<li v-for="item in items">
-				    {{item}}
+				  	{{item}}
 				</li>
 			</div>
-			
-			<div>
+
+			<form @submit.prevent="addProfiles">
+				<input type="text" v-model="newProfilesName">
+				<input type="text" v-model="newProfilesAge">
+				<input type="submit" value="submit">
+			</form>
+			<ul>
 				<li v-for="profile in profiles">
 				    {{profile.name}} - {{profile.age}} 
 				</li>

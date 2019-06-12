@@ -8,7 +8,7 @@ Vue.component('snake-game',{
 			</div>
 			<br><br>
 			<span><p class = "score">Score: <b>{{ score }}</b></p></span>
-			<span><p class = "scorer" v-show="temp">Best Scorer: {{ Scorer }} - {{ hi_score }}</p></span>
+			<span><p class = "scorer" v-show="temp">Best Scorer: {{ Scorer }} ({{ hi_score }})</p></span>
 		</div>
 
 	`,
@@ -56,7 +56,7 @@ Vue.component('snake-game',{
 
 			window.addEventListener('keyup', this.changeDirection);
 
-			setInterval(this.move,250);			
+			setInterval(this.move,100);			
 			
 		},
 		newGame(){

@@ -5,16 +5,32 @@ var vm = new Vue({
       newItem: '',
       profiles:[
       	{	name: 'tipu',
-      	 	age: 36,
+      	 	age: '36',
       	}
       ],
-      newProfiles: ''
+      newProfiles: [
+         {  name: '',
+            age: ''
+         }
+      ],
+      newProfilesName:'',
+      newProfilesAge: ''
    },
    methods:{
    	addItems: function(){
-   		this.items.push(this.newItem)
+   		this.items.push(this.newItem);
+         this.newItem = ''
    		
-   	}
+   	},
+
+      addProfiles: function(){
+         this.profiles.push({name:this.newProfilesName, age:this.newProfilesAge});
+         this.newProfilesName = '';
+         this.newProfilesAge = ''
+      },
+      add: function(){
+         alert("20");
+      }
    }
 
 })
